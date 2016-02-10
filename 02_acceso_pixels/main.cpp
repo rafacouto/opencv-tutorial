@@ -37,8 +37,8 @@ int main()
     }
 
     // mostrar la imagen
-    cv::namedWindow("02 Acceso a pixels", CV_WINDOW_AUTOSIZE);
-    cv::imshow("Imagen 1", imagen);
+    cv::namedWindow("02", CV_WINDOW_AUTOSIZE);
+    cv::imshow("02", imagen);
 
     // guardar el resultado
     cv::imwrite("resultado.jpg", imagen);
