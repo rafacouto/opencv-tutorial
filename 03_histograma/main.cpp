@@ -21,14 +21,14 @@ int main()
 		exit(1);
 	}
 
-	/// separar la imagen en 3 planos (RGB)
-	vector<cv::Mat> bgr_planes;
+	/// separar la imagen en 3 planos BGR
+	cv::Mat bgr_planes[3];
     cv::split(src, bgr_planes);
 
 	// variables para el histograma
 	int histSize = 256;
 
-	/// los rangos RGB
+	/// los rangos BGR
 	const float range[] = { 0, 255 };
 	const float* histRange = { range };
 
@@ -38,7 +38,7 @@ int main()
     // matrices para histogramas RGB
     cv::Mat r_hist, g_hist, b_hist;
 
-	// calcular histogramas RGB
+	// calcular histogramas RGB (orden BGR)
     cv::calcHist(&bgr_planes[2], 1, 0, cv::Mat(), r_hist, 1, &histSize, &histRange, uniform, accumulate);
     cv::calcHist(&bgr_planes[1], 1, 0, cv::Mat(), g_hist, 1, &histSize, &histRange, uniform, accumulate);
     cv::calcHist(&bgr_planes[0], 1, 0, cv::Mat(), b_hist, 1, &histSize, &histRange, uniform, accumulate);
@@ -89,11 +89,9 @@ int main()
 	}
 
 	// mostrar imagen
-    cv::namedWindow("Imagen", CV_WINDOW_AUTOSIZE);
     cv::imshow("Imagen", src);
 
     // mostrar histograma
-    cv::namedWindow("Histograma", CV_WINDOW_AUTOSIZE);
     cv::imshow("Histograma", histImage);
 
 	// esperar a pulsar una tecla

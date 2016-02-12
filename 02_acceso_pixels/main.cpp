@@ -38,7 +38,6 @@ int main()
     }
 
     // mostrar la imagen
-    //cv::namedWindow("02", CV_WINDOW_AUTOSIZE);
     cv::imshow("02", imagen);
 
     // guardar el resultado
