@@ -15,14 +15,14 @@ int main()
 
     // cargar la imagen y comprobar que lo ha hecho correctamente
     cv::Mat imagen = cv::imread(nombreImagen);
-    if (imagen.empty()) {
+    if (imagen.empty())
+    {
         cout << "Error al cargar la imagen: " << nombreImagen << endl;
         exit(1);
     }
 
     // mostrar la imagen
-    cv::namedWindow("02", CV_WINDOW_AUTOSIZE);
-    cv::imshow("02", imagen);
+    cv::imshow("01", imagen);
 
     // esperar a pulsar una tecla para salir
     cvWaitKey(0);
