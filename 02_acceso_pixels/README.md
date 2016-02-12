@@ -75,8 +75,9 @@ Obtiene la referencia a un pixel de la imagen para leerlo o modificarlo.
 
    Vec<_Tp,n>& Mat::at(const Point_<_Tp>& idx);
 
-Es más intuitivo utilizar el operador _( x, y )_ que está escrito para los tipos int, float y double:
+Ejemplo:
 
-```
-```
+    // acceso al pixel en x,y para cambiarlo
+    cv::Point pixel = cv::Point(x, y);
+    imagen.at<cv::Vec3b>(pixel) = color;
 
