@@ -32,12 +32,13 @@ int main()
         for (int y = imagen.cols / 4; y < maxY; y++) {
 
             // acceso al pixel en x,y para cambiarlo
-            imagen.at<cv::Vec3b>(cv::Point(x,y)) = color;
+            cv::Point pixel = cv::Point(x, y);
+            imagen.at<cv::Vec3b>(pixel) = color;
         }
     }
 
     // mostrar la imagen
-    cv::namedWindow("02", CV_WINDOW_AUTOSIZE);
+    //cv::namedWindow("02", CV_WINDOW_AUTOSIZE);
     cv::imshow("02", imagen);
 
     // guardar el resultado

@@ -1,38 +1,6 @@
 # Acceso a pixels
 
-## Clase cv::Mat
-
-```
-class CV_EXPORTS Mat
-{
-public:
-
-    /*! includes several bit-fields:
-         - the magic signature
-         - continuity flag
-         - depth
-         - number of channels
-     */
-    int flags;
-
-    //! the array dimensionality, >= 2
-    int dims;
-
-    //! the number of rows and columns or (-1, -1) when more than 2 dimensions
-    int rows, cols;
-
-    //! pointer to the data
-    uchar* data;
-
-    //! pointer to the reference counter;
-    // when array points to user-allocated data, the pointer is NULL
-    int* refcount;
-
-    // other members
-    ...
-};
-```
-
+![Acceso a pixels](screenshot/01.png)
 
 ## Clase cv::Vec
 
@@ -72,4 +40,43 @@ typedef Vec<double, 4> Vec4d; // 4 double
 typedef Vec<double, 6> Vec6d; // 6 double
 ```
 
+## cv::Point_
+
+Define un punto en el espacio 2D con sus 2 componentes _x_ e _y_ que pueden ser de tipo numérico.
+
+Expone las propiedades _Point::x_ y _Point::y_ para el acceso a las componentes.
+
+El tipo _Point_ es un alias a _Point2i_ (punto definido por componentes de tipo int).
+
+```
+template<typename _Tp> class Point_ { ... }
+
+typedef Point_<int> Point2i;     // 2 int 
+typedef Point_<float> Point2f;   // 2 float
+typedef Point_<double> Point2d;  // 2 double
+
+typedef Point2i Point;
+```
+
+Están las versiones para puntos 3D con los alias para int (Point3i), float (Point3f) y double (Point3d):
+
+```
+template<typename _Tp> class Point3_ { ... }
+
+typedef Point3_<int> Point3i;    // 3 int
+typedef Point3_<float> Point3f;  // 3 float
+typedef Point3_<double> Point3d; // 3 double
+```
+
+
+## Mat::at()
+
+Obtiene la referencia a un pixel de la imagen para leerlo o modificarlo.
+
+   Vec<_Tp,n>& Mat::at(const Point_<_Tp>& idx);
+
+Es más intuitivo utilizar el operador _( x, y )_ que está escrito para los tipos int, float y double:
+
+```
+```
 
