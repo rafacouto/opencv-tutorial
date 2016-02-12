@@ -16,7 +16,7 @@ int main()
 
 	// cargar la imagen y comprobar que lo ha hecho correctamente
     cv::Mat src = cv::imread(nombreImagen);
-	if (!src.data) {
+	if (src.empty()) {
 		cout << "Error al cargar la imagen: " << nombreImagen << endl;
 		exit(1);
 	}
