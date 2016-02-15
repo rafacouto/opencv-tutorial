@@ -91,6 +91,6 @@ enum cv::LineTypes {
 
 Rounds floating-point number to the nearest integer.
 
-   int cvRound(cvRound float value)
-   int cvRound(cvRound double value)
+    int cvRound(cvRound float value)
+    int cvRound(cvRound double value)
 
