@@ -11,62 +11,62 @@ using namespace std;
 
 int main()
 {
-	// nombre del fichero
-	char nombreImagen[] = "loros.jpg";
+    // nombre del fichero
+    char nombreImagen[] = "loros.jpg";
 
-	// cargar la imagen y comprobar que lo ha hecho correctamente
+    // cargar la imagen y comprobar que lo ha hecho correctamente
     cv::Mat src = cv::imread(nombreImagen);
-	if (src.empty()) {
-		cout << "Error al cargar la imagen: " << nombreImagen << endl;
-		exit(1);
-	}
+    if (src.empty()) {
+        cout << "Error al cargar la imagen: " << nombreImagen << endl;
+        exit(1);
+    }
 
-	/// separar la imagen en 3 planos BGR
-	cv::Mat bgr_planes[3];
+    /// separar la imagen en 3 planos BGR
+    cv::Mat bgr_planes[3];
     cv::split(src, bgr_planes);
 
-	// variables para el histograma
-	int histSize = 256;
+    // variables para el histograma
+    int histSize = 256;
 
-	/// los rangos BGR
-	const float range[] = { 0, 255 };
-	const float* histRange = { range };
+    /// los rangos BGR
+    const float range[] = { 0, 255 };
+    const float* histRange = { range };
 
-	bool uniform = true;
-	bool accumulate = false;
+    bool uniform = true;
+    bool accumulate = false;
 
     // matrices para histogramas RGB
     cv::Mat r_hist, g_hist, b_hist;
 
-	// calcular histogramas RGB (orden BGR)
+    // calcular histogramas RGB (orden BGR)
     cv::calcHist(&bgr_planes[2], 1, 0, cv::Mat(), r_hist, 1, &histSize, &histRange, uniform, accumulate);
     cv::calcHist(&bgr_planes[1], 1, 0, cv::Mat(), g_hist, 1, &histSize, &histRange, uniform, accumulate);
     cv::calcHist(&bgr_planes[0], 1, 0, cv::Mat(), b_hist, 1, &histSize, &histRange, uniform, accumulate);
 
     // salida estándar con el histograma B
-	cout << "hist: " << b_hist << endl;
+    cout << "hist: " << b_hist << endl;
 
-	// imagen para histograma RGB
-	const int hist_w = 512;
+    // imagen para histograma RGB
+    const int hist_w = 512;
     const int hist_h = 400;
     cv::Mat histImage(hist_h, hist_w, CV_8UC3, cv::Scalar(0, 0, 0));
 
-	/// normalizar el resultado a [ 0, histImage.rows ]
-	normalize(r_hist, r_hist, 0, hist_h, cv::NORM_MINMAX, -1, cv::Mat());
-	normalize(b_hist, b_hist, 0, hist_h, cv::NORM_MINMAX, -1, cv::Mat());
-	normalize(g_hist, g_hist, 0, hist_h, cv::NORM_MINMAX, -1, cv::Mat());
+    /// normalizar el resultado a [ 0, histImage.rows ]
+    normalize(r_hist, r_hist, 0, hist_h, cv::NORM_MINMAX, -1, cv::Mat());
+    normalize(b_hist, b_hist, 0, hist_h, cv::NORM_MINMAX, -1, cv::Mat());
+    normalize(g_hist, g_hist, 0, hist_h, cv::NORM_MINMAX, -1, cv::Mat());
 
     // salida estándar con el histograma B normalizado
-	cout << "hist: " << b_hist << endl;
+    cout << "hist: " << b_hist << endl;
 
     // colores RGB
     const cv::Scalar red(255, 0, 0);
     const cv::Scalar green(0, 255, 0);
     const cv::Scalar blue(0, 0, 255);
 
-	/// dibujar para cada canal RGB
-	int bin_w = cvRound((double)hist_w / histSize);
-	for (int i = 1; i < histSize; i++) {
+    // dibujar para cada canal RGB
+    int bin_w = cvRound((double)hist_w / histSize);
+    for (int i = 1; i < histSize; i++) {
 
         // calcular X
         cv::Point from(bin_w * (i - 1), 0);
@@ -86,17 +86,17 @@ int main()
         from.y = hist_h - cvRound(b_hist.at<float>(i - 1));
         to.y = hist_h - cvRound(b_hist.at<float>(i));
         cv::line(histImage, from, to, blue, 2, 8, 0);
-	}
+    }
 
-	// mostrar imagen
+    // mostrar imagen
     cv::imshow("Imagen", src);
 
     // mostrar histograma
     cv::imshow("Histograma", histImage);
 
-	// esperar a pulsar una tecla
-	cvWaitKey(0);
-	return 0;
+    // esperar a pulsar una tecla
+    cvWaitKey(0);
+    return 0;
 }
 
 // vim: tw=78:sw=4:ts=4:et
