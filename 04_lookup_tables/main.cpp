@@ -10,7 +10,7 @@ using namespace std;
 int main()
 {
     // nombre del fichero
-    char nombreImagen[] = "ivvi_684x684_gray.jpg";
+    char nombreImagen[] = "ivvi_300_gray.jpg";
 
 
     // cargar la imagen y comprobar que lo ha hecho correctamente
