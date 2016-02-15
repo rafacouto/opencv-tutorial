@@ -2,6 +2,10 @@
 
 ![Histograma](screenshot/01.png)
 
+El histograma contiene el __número de pixeles que tienen el mismo nivel de gris__ (o de una componente de color si la imagen es compuesta). Puede entenderse como la probabilidad de que un valor de gris determinado aparezca en la imagen. 
+
+Tiene la gran ventaja que condensa la información de la imagen en muchos menos valores ( 256 si cada pixel son 8 bits). POr contra, no aporta ninguna información sobre la localización espacial de los pixeles.
+
 ## cv::split()
 
 The functions split split a multi-channel array into separate single-channel
